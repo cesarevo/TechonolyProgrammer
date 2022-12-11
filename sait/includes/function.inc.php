@@ -46,7 +46,7 @@ function existUser($pdo,$mail)
 {
        
     $result = false;
-    $sql = "SELECT * FROM users WHERE mail = ?;";
+    $sql = "SELECT * FROM users WHERE email = ?;";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute([$mail]);
         
