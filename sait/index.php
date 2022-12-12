@@ -26,7 +26,7 @@ if(isset($_SESSION['email']) and isset($_SESSION['password']))
 	<header>
                 <div class= "time4school">
                     <div class="school">
-                        <button OnClick ="makeRequest('vid.php')"><img src='images\logo.png'></button>
+                        <button OnClick ="makeRequest('main.php')"><img src='images\logo.png'></button>
                     
                             <h1>VidTranslator</h1>
                     </div>

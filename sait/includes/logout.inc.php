@@ -4,6 +4,7 @@
     unset($_SESSION['email']);
     unset($_SESSION['password']);
     unset($_SESSION['name']);
+    unset($_SESSION['link']);
     session_destroy();
     $response = 
     [

@@ -165,7 +165,16 @@ body{
     .vid h1{
      margin: 10px;
      }
-
+    .profile{
+        display: flex;
+        flex-direction: row;
+    }
+    .vid{
+        width: 50%;        
+    }
+    .info{
+        width: 50%;        
+    }
 
    footer{
        position: fixed;

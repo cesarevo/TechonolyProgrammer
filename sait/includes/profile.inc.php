@@ -4,7 +4,7 @@ session_start();
 if (isset($_POST['submit']))
 {
     
-    $mail = $_SESSION['email'];
+    $email = $_SESSION['email'];
     $todo_name = $_POST['todo_name'];
     $todo_text = $_POST['todo_text'];
     $prog = 'false';

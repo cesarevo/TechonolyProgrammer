@@ -272,7 +272,34 @@ function validateLogin(e){
 	});
 	
 }*/
+/*function donwload(input){
+	let file = input.files;
+	let reader = new FileReader();
+	reader.readAsDataURL(file);
 
+	reader.onload = function(){
+		let img = document.createElement('.img');
+		wrapper.appendChild(img);
+		img.src = reader.result;
+
+	}
+
+}*/
+function readUrl(){
+	let video = $('input[name="video-link"]').val();
+	console.log(video);
+	$.ajax({
+		type:'POST',
+		url: 'includes/vid.inc.php',
+		dataType:'json',
+		data: {
+
+		}
+		/*$('form').serialize(),
+	}).done(function(data){
+		console.log(data);*/
+	})
+}
 
 
 

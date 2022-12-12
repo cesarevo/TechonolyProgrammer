@@ -1,6 +1,6 @@
 
 <div class ="profile">   
-    <form>
+    <form class="info">
         <?php
         session_start();
          if(isset($_SESSION['email']) and isset($_SESSION['password']))
@@ -26,7 +26,7 @@
                 </form>
             <?php
             
-            require 'todo.php';
+            require 'vid.php';
            
             ?>
              <?php
