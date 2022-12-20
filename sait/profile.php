@@ -19,7 +19,7 @@
                     <button name="submit" Onclick="logout(event)">
                         <h5>Выйти</h5>
                     </button>
-                    <h4>Список дел:</h4>      
+                    <h4>Список слов:</h4>      
                     <div id ="todolist">
 
                     </div>
