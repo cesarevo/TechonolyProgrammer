@@ -4,20 +4,14 @@ from .models import User, Post
 from django.http import HttpResponse
 from django.contrib import messages
 
-# Create your views here.
+
 class HomePageView(ListView):
     def get(self, request):
-        '''
-        If user request get method in url direct than reach home page.
-        '''
         all_posts = Post.objects.all().order_by('-id')
         param = {'posts':all_posts}
         return render(request, 'home.html', param)
 
     def post(self, request):
-        '''
-        Create account system
-        '''
         user_name = request.POST['uname']
         pwd1 = request.POST['pwd1']
         pwd2 = request.POST['pwd2']
@@ -74,22 +68,6 @@ class DeleteView(ListView):
         delete_post.delete()
         messages.success(request, 'Your post has been deleted successfully.')
         return redirect(f'/profile/{user}')
-
-
-# Search View
-class SearchView(ListView):
-    def get(self, request):
-        query = request.GET['query']
-        search_users = User.objects.filter(username__icontains=query)
-        search_title = Post.objects.filter(title__icontains = query)
-        search_desc = Post.objects.filter(desc__icontains = query)
-        search_result = search_title.union(search_desc)
-        param = {'query':query, 'search_result':search_result, 'search_users':search_users}
-        return render(request, 'search.html', param)
-
-
-
-
 
 
 
