@@ -5,6 +5,35 @@ from django.http import HttpResponse
 from django.contrib import messages
 
 
+# Login
+class LoginView(ListView):
+    def get(self, request):
+        return redirect('home')
+
+    def post(self, request):
+        user_name = request.POST['uname']
+        pwd = request.POST['pwd']
+
+        user_exists = User.objects.filter(username=user_name, password=pwd).exists()
+        if user_exists:
+            request.session['user'] = user_name
+            messages.success(request, 'You are logged in successfully.')
+            return redirect('home')
+        else:
+            messages.warning(request, 'Invalid Username or Password.')
+            return redirect('home')
+        return redirect('home')
+
+
+class LogoutView(ListView):
+    def get(self, request):
+        try:
+            del request.session['user']
+        except:
+            return redirect('home')
+        return redirect('home')
+
+
 class HomePageView(ListView):
     def get(self, request):
         all_posts = Post.objects.all().order_by('-id')
@@ -30,7 +59,9 @@ class HomePageView(ListView):
 
 
 
-# Create Upload File System
+# Create Upload File
+
+
 class UploadView(ListView):
     def get(self, request, user_name):
         return render(request, 'upload_file.html')
@@ -50,6 +81,8 @@ class UploadView(ListView):
 
 
 # View User Profile
+
+
 class ProfileView(ListView):
     def get(self, request, user_name):
         user_obj = User.objects.get(username=user_name)
@@ -71,29 +104,18 @@ class DeleteView(ListView):
 
 
 
-# Login System
-class LoginView(ListView):
+
+
+# Search View
+
+
+class SearchView(ListView):
     def get(self, request):
-        return redirect('home')
+        query = request.GET['query']
+        search_users = User.objects.filter(username__icontains=query)
+        search_title = Post.objects.filter(title__icontains = query)
+        search_desc = Post.objects.filter(desc__icontains = query)
+        search_result = search_title.union(search_desc)
+        param = {'query':query, 'search_result':search_result, 'search_users':search_users}
+        return render(request, 'search.html', param)
 
-    def post(self, request):
-        user_name = request.POST['uname']
-        pwd = request.POST['pwd']
-
-        user_exists = User.objects.filter(username=user_name, password=pwd).exists()
-        if user_exists:
-            request.session['user'] = user_name
-            messages.success(request, 'You are logged in successfully.')
-            return redirect('home')
-        else:
-            messages.warning(request, 'Invalid Username or Password.')
-            return redirect('home')
-        return redirect('home')
-
-class LogoutView(ListView):
-    def get(self, request):
-        try:
-            del request.session['user']
-        except:
-            return redirect('home')
-        return redirect('home')
